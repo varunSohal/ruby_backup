@@ -1,4 +1,5 @@
 class ProductController < ApplicationController
+  before_action :authenticate_user!
   def index
     @products = Product.page(params[:page]).per(10)
   end

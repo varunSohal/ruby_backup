@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bluewings</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>BlueWings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all' %>
-
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= javascript_include_tag "rails-ujs" %>
   </head>
-
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <div>
+      <div class="mt-4">
+        <% if user_signed_in? %>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "inline-block bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors" %>
+        <% else %>
+          <%= link_to "Login", new_user_session_path, class: "inline-block bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors" %>
+          <%= link_to "Register", new_user_registration_path, class: "inline-block bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors" %>
+        <% end %>
+      </div>
       <%= yield %>
-    </main>
+    </div>
   </body>
 </html>

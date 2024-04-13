@@ -82,3 +82,4 @@ gem "faker", "~> 3.3"
 
 gem 'kaminari'
 
+gem 'turbolinks', '~> 5'

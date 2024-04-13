@@ -1,1 +1,3 @@
-//= require active_admin/base
+//= require rails-ujs
+//= require turbolinks
+//= require_tree .

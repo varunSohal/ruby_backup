@@ -1,28 +1,21 @@
 Rails.application.routes.draw do
-  devise_for :users
   # Devise routes for admin users
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  # ActiveAdmin routes
-  ActiveAdmin.routes(self)
-
-  # Regular user routes for products
-  resources :product, only: [:index, :show]
-
-  # Routes for regular users to view contact and about pages
-  resources :contact_pages, only: [:show], path: 'contact'
-  resources :about_pages, only: [:show], path: 'about'
-
-  # Namespace for admin routes
-  namespace :admin do
-    # Route for admin to manage about page
-    resource :about, only: [:show], controller: 'abouts', path: 'about'
-  end
+  # Specify the namespace for the users registrations controller
+  devise_for :users, controllers: { registrations: 'user_management/registrations' }
 
   # Root route
-  root 'product#index'
+  root 'products#index'
 
-  # Route for regular users to view about page
+  # Routes for regular users to view about page and contact page
   get '/about', to: 'about#show', as: 'about'
   get '/contact', to: 'contact#show', as: 'contact'
+
+  resources :categories, only: [:show] do
+    get 'product', to: 'categories#product', on: :member
+  end
+
+  resources :product, only: [:index, :show] # corrected from :product to :products
+
 end
