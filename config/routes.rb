@@ -12,10 +12,11 @@ Rails.application.routes.draw do
   get '/about', to: 'about#show', as: 'about'
   get '/contact', to: 'contact#show', as: 'contact'
 
-  resources :categories, only: [:show] do
-    get 'product', to: 'categories#product', on: :member
+  resources :categories do
+    resources :books, only: [:index]
   end
 
-  resources :product, only: [:index, :show] # corrected from :product to :products
+
+  resources :products
 
 end
