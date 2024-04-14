@@ -1,6 +1,12 @@
 class Product < ApplicationRecord
   belongs_to :category
 
+  belongs_to :category
+  validates :name, presence: true
+  validates :desc, presence: true
+  validates :category_id, presence: true
+  validates :price, presence: true, numericality: { only_integer: true }
+
   def self.search(keyword, category_id = nil)
     if category_id.present?
       where(category_id: category_id).where("name LIKE ? OR desc LIKE ?", "%#{keyword}%", "%#{keyword}%")
