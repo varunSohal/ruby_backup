@@ -1,6 +1,5 @@
-<!-- app/views/products/index.html.erb -->
+<!-- Tailwind CSS styles for products/index.html.erb -->
 
-<a href="/products/view_cart">View Cart</a>
 <div class="container mx-auto py-8">
   <%= form_tag(products_path, method: "get", class: "mb-4") do %>
     <div class="flex">
@@ -28,7 +27,7 @@
       <form action="<%= add_to_cart_product_path(product) %>" method="post">
         <input type="hidden" name="_method" value="post">
         <input type="hidden" name="product_id" value="<%= product.id %>">
-        <input type="submit" value="Add to Cart">
+        <input type="submit" value="Add to Cart" class="bg-blue-500 text-white px-4 py-2 rounded">
       </form>
     </div>
   <% end %>
