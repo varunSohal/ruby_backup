@@ -1,0 +1,26 @@
+<!-- app/views/cart/view.html.erb -->
+
+<h1>Your Cart</h1>
+
+<% if @cart.present? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart.each do |item| %>
+        <tr>
+          <td><%= item[:product].name %></td>
+          <td><%= item[:quantity] %></td>
+          <td>$<%= item[:product].price * item[:quantity] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Your cart is empty.</p>
+<% end %>

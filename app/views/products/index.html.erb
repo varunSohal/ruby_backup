@@ -1,22 +1,30 @@
+<a href= "/products/view_cart">View Cart</a>
 <div class="container mx-auto py-8">
-<%= form_tag(products_path, method: "get", class: "mb-4") do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search products...", class: "w-full border border-gray-300 rounded px-4 py-2" %>
-  <%= select_tag :category_id, options_from_collection_for_select(Category.all, :id, :name, params[:category_id]), include_blank: true, class: "w-full border border-gray-300 rounded px-4 py-2 mt-2" %>
-  <%= submit_tag "Search", class: "mt-2 bg-blue-500 text-white px-4 py-2 rounded" %>
-<% end %>
-</div>
+  <%= form_tag(products_path, method: "get", class: "mb-4") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search products...", class: "w-full border border-gray-300 rounded px-4 py-2" %>
+    <%= select_tag :category_id, options_from_collection_for_select(Category.all, :id, :name, params[:category_id]), include_blank: true, class: "w-full border border-gray-300 rounded px-4 py-2 mt-2" %>
+    <%= submit_tag "Search", class: "mt-2 bg-blue-500 text-white px-4 py-2 rounded" %>
+  <% end %>
 
-<% Category.all.each do |category| %>
-<%= render partial: 'shared/category_navbar', locals: { category: category } %>
-<% end %>
-
+  <% Category.all.each do |category| %>
+    <%= render partial: 'shared/category_navbar', locals: { category: category } %>
+  <% end %>
   <% @products.each do |product| %>
     <div class="mt-4">
-      <h2 class="text-lg font-semibold"><%= product.name %></h2>
+      <h2 class="text-lg font-semibold"><a href="<%= product_path(product) %>"><%= product.name %></a></h2>
       <p class="mt-2 text-gray-700"><%= product.desc %></p>
       <p class="mt-2 text-gray-700">Price: <%= product.price %></p>
+      <form action="<%= add_to_cart_product_path(product) %>" method="post">
+        <input type="hidden" name="_method" value="post">
+        <input type="hidden" name="product_id" value="<%= product.id %>">
+        <input type="submit" value="Add to Cart">
+      </form>
     </div>
   <% end %>
 
   <%= paginate @products, class: "mt-4" %>
+</div>
+
+<div class="mt-4">
+  <%= link_to "View Cart", view_cart_products_path, class: "text-blue-500 hover:underline" %>
 </div>
