@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'user_management/registrations' }
 
   # Root route
-  # root 'products#index'
+  root 'products#index'
 
   # Routes for regular users to view about page and contact page
   get '/about', to: 'about#show', as: 'about'
