@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 has_one :cart
-         belongs_to :province
+        #  belongs_to :province
          validates :email, presence: true, uniqueness: true
          validates :province_id, presence: true
 end
