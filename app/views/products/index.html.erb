@@ -1,18 +1,14 @@
-<!-- Tailwind CSS styles for products/index.html.erb -->
-
 <div class="container mx-auto py-8">
-  <%= form_tag(products_path, method: "get", class: "mb-4") do %>
-    <div class="flex">
-      <%= text_field_tag :search, params[:search], placeholder: "Search products...", class: "w-full border border-gray-300 rounded-l px-4 py-2" %>
-      <%= select_tag :filter, options_for_select([["All", ""], ["Products on Sale", "on_sale"], ["New Products", "new"], ["Recently Updated Products", "recently_updated"]], params[:filter]), class: "border border-gray-300 rounded-r px-4 py-2" %>
-      <%= submit_tag "Search", class: "bg-blue-500 text-white px-4 py-2 rounded-r" %>
-    </div>
+  <%= form_tag(products_path, method: "get", class: "mb-4 flex") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search products...", class: "w-full border border-gray-300 rounded-l px-4 py-2" %>
+    <%= select_tag :filter, options_for_select([["All", ""], ["Products on Sale", "on_sale"], ["New Products", "new"], ["Recently Updated Products", "recently_updated"]], params[:filter]), class: "border border-gray-300 rounded-r px-4 py-2" %>
+    <%= submit_tag "Search", class: "bg-blue-500 text-white px-4 py-2 rounded-r" %>
   <% end %>
 
   <div class="filter-options mt-4">
-    <%= link_to "Products on Sale", products_path(filter: "on_sale"), class: "mr-4" %>
-    <%= link_to "New Products", products_path(filter: "new"), class: "mr-4" %>
-    <%= link_to "Recently Updated Products", products_path(filter: "recently_updated") %>
+    <%= link_to "Products on Sale", products_path(filter: "on_sale"), class: "mr-4 text-blue-500 hover:underline" %>
+    <%= link_to "New Products", products_path(filter: "new"), class: "mr-4 text-blue-500 hover:underline" %>
+    <%= link_to "Recently Updated Products", products_path(filter: "recently_updated"), class: "text-blue-500 hover:underline" %>
   </div>
 
   <% Category.all.each do |category| %>
